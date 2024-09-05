@@ -2,7 +2,7 @@ import type { LanguageInterface } from '$lib/server/interfaces/language.interfac
 import type { RawDataType } from '$lib/server/interfaces/raw-data.interface';
 import lodash from 'lodash';
 
-export function getLanguageLiteralList(language: LanguageInterface, data: RawDataType[]) {
+export function getLanguageLiteralsJson(language: LanguageInterface, data: RawDataType[]) {
 	const i18n: { [index: string]: object | string } = {};
 
 	data.forEach(row => {

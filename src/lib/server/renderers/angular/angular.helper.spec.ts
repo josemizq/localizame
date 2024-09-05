@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-	getLanguageLiteralList,
+	getLanguageLiteralsJson,
 	reformatDynamicValues,
 	replaceAndEscapeValues
 } from './angular.helper';
@@ -13,7 +13,7 @@ describe('Get angular literal list', () => {
 			{ key: 'created', English: 'created', Spanish: 'creado', Portuguese: 'creadiño' }
 		];
 
-		const processedList = getLanguageLiteralList(language, xlsx);
+		const processedList = getLanguageLiteralsJson(language, xlsx);
 		expect(processedList).toEqual({
 			"CREATED": 'creado',
 			"DELETED": 'eliminado'
@@ -27,7 +27,7 @@ describe('Get angular literal list', () => {
 			{ key: 'created', English: 'created', Spanish: 'creado', Portuguese: 'creadiño' }
 		];
 
-		const processedList = getLanguageLiteralList(language, xlsx);
+		const processedList = getLanguageLiteralsJson(language, xlsx);
 		expect(processedList).toEqual({
 			"DELETED": 'eliminadiño',
 			"CREATED": 'creadiño'
