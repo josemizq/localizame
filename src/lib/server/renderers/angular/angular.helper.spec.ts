@@ -14,10 +14,10 @@ describe('Get angular literal list', () => {
 		];
 
 		const processedList = getLanguageLiteralList(language, xlsx);
-		expect(processedList).toEqual([
-			{ key: 'deleted', value: 'eliminado' },
-			{ key: 'created', value: 'creado' }
-		]);
+		expect(processedList).toEqual({
+			"CREATED": 'creado',
+			"DELETED": 'eliminado'
+		});
 	});
 
 	it('should get portuguese literal list from XLSX', () => {
@@ -28,10 +28,10 @@ describe('Get angular literal list', () => {
 		];
 
 		const processedList = getLanguageLiteralList(language, xlsx);
-		expect(processedList).toEqual([
-			{ key: 'deleted', value: 'eliminadiño' },
-			{ key: 'created', value: 'creadiño' }
-		]);
+		expect(processedList).toEqual({
+			"DELETED": 'eliminadiño',
+			"CREATED": 'creadiño'
+		});
 	});
 });
 
@@ -53,14 +53,14 @@ describe('Replace and format angular strings', () => {
 	it('should always use same single quotes and escape them', () => {
 		const xlsxValue = 'Hello, what a `beautiful` day, don´t you think?';
 		expect(replaceAndEscapeValues(xlsxValue)).toBe(
-			`Hello, what a \\'beautiful\\' day, don\\'t you think?`
+			`Hello, what a 'beautiful' day, don't you think?`
 		);
 	});
 
 	it('should always use same double quotes and escape them', () => {
 		const xlsxValue = 'Hello, what a ”beautiful” day, don”t you think?';
 		expect(replaceAndEscapeValues(xlsxValue)).toBe(
-			`Hello, what a \\"beautiful\\" day, don\\"t you think?`
+			`Hello, what a "beautiful" day, don"t you think?`
 		);
 	});
 

@@ -22,7 +22,7 @@ describe('Generate angular files', () => {
 		await generateAngular(xlsx, path.join(tempDirPath, 'angular'));
 
 		const folders = await readdir(path.join(tempDirPath, 'angular'));
-		expect(folders).toEqual(['values', 'values-en', 'values-es']);
+		expect(folders).toEqual(['en.json', 'es.json']);
 	});
 
 	it('should contain all literals for a language', async () => {
@@ -35,14 +35,10 @@ describe('Generate angular files', () => {
 		await generateAngular(xlsx, path.join(tempDirPath, 'angular'));
 
 		const fileContent = await readFile(
-			path.join(tempDirPath, 'angular', 'values-en', 'strings.xml')
+			path.join(tempDirPath, 'angular', '', 'en.json')
 		).then((data) => data.toString());
 
-		expect(fileContent).toEqual(`<?xml version="1.0" ?>
-<resources>
-    <string name="deleted">deleted</string>
-    <string name="created">created</string>
-</resources>`);
+		expect(fileContent).toEqual(`{\n  "DELETED": "deleted",\n  "CREATED": "created"\n}`);
 	});
 
 	afterEach(async () => {

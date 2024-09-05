@@ -14,14 +14,7 @@ export function getLanguageLiteralList(language: LanguageInterface, data: RawDat
 
 function _transformToObject(row: RawDataType, language: LanguageInterface) {
 	const keyList = (`${ Object.values(row)[0] }`).split('_');
-	const i18n: { [index: string]: object | string } = {};
-
-	const key = _getNormalizedKey(keyList[0]);
-	const aux = _getNextKeyList(keyList);
-
-	i18n[key] = {..._getKeyValue(aux, row, language)};
-
-	return i18n;
+	return {..._getKeyValue(keyList, row, language)};
 }
 
 function _getKeyValue(data: string[], row: RawDataType, language: LanguageInterface) {
@@ -62,6 +55,5 @@ export function replaceAndEscapeValues(literal: string) {
 			.replace(/([’´`])/g, "'")
 			.replace(/([“”])/g, '"')
 			.replaceAll('\u00A0', ' ')
-			.replaceAll('...', '…')
 	);
 }
