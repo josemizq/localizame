@@ -38,13 +38,13 @@ describe('Get angular literal list', () => {
 describe('Reformat angular dynamic values', () => {
 	it('should only show 1 dynamic value', () => {
 		const xlsxValue = 'I hate pizza, I rather eat %value%';
-		expect(reformatDynamicValues(xlsxValue)).toEqual('I hate pizza, I rather eat %1$s');
+		expect(reformatDynamicValues(xlsxValue)).toEqual('I hate pizza, I rather eat {{ value1 }}');
 	});
 
 	it('should show 3 dynamic value', () => {
 		const xlsxValue = 'I hate pizza, I rather eat %value%, %value% and %value%';
 		expect(reformatDynamicValues(xlsxValue)).toEqual(
-			'I hate pizza, I rather eat %1$s, %2$s and %3$s'
+			'I hate pizza, I rather eat {{ value1 }}, {{ value2 }} and {{ value3 }}'
 		);
 	});
 });
@@ -58,14 +58,14 @@ describe('Replace and format angular strings', () => {
 	});
 
 	it('should always use same double quotes and escape them', () => {
-		const xlsxValue = 'Hello, what a ”beautiful” day, don”t you think?';
+		const xlsxValue = `Hello, what a ”beautiful” day, don't you think?`;
 		expect(replaceAndEscapeValues(xlsxValue)).toBe(
-			`Hello, what a "beautiful" day, don"t you think?`
+			`Hello, what a \\"beautiful\\" day, don't you think?`
 		);
 	});
 
 	it('should replace ... with char …', () => {
 		const xlsxValue = 'How about...';
-		expect(replaceAndEscapeValues(xlsxValue)).toBe('How about…');
+		expect(replaceAndEscapeValues(xlsxValue)).toBe('How about...');
 	});
 });

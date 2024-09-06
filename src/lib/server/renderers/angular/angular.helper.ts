@@ -53,7 +53,7 @@ export function replaceAndEscapeValues(literal: string) {
 	return reformatDynamicValues(
 		literal
 			.replace(/([’´`])/g, "'")
-			.replace(/([“”])/g, '"')
+			.replace(/([“”])/g, '\\"')
 			.replaceAll('\u00A0', ' ')
 	);
 }
